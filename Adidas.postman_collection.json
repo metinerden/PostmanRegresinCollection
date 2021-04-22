@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "24ebdbb4-9447-481a-8535-bf3be34969f2",
+		"name": "Adidas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"payload= JSON.parse(responseBody);\r",
+							"var categoryNameValue=payload.category.name;\r",
+							"var nameValue=payload.name;\r",
+							"var tagsNameValue=payload.tags[0].name;\r",
+							"var statusValue=payload.status;\r",
+							"var photoValue=payload.photoUrls;\r",
+							"\r",
+							"console.log(\"categoryNameValue : \"+ categoryNameValue);\r",
+							"console.log(\"nameValue : \"+nameValue);\r",
+							"console.log(\"tagsNameValue :\"+tagsNameValue);\r",
+							"console.log(\"statusValue :\"+statusValue);\r",
+							"console.log(\"photoValue : \"+photoValue);\r",
+							"\r",
+							"pm.environment.set(\"categoryNameValue\", categoryNameValue);\r",
+							"pm.environment.set(\"nameValue\",nameValue);\r",
+							"pm.environment.set(\"tagsNameValue\",tagsNameValue);\r",
+							"pm.environment.set(\"statusValue\",statusValue);\r",
+							"pm.environment.set(\"photoValue\",photoValue);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(payload, function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"available\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.category.name).to.eql(\"Running\");\r",
+							"});\r",
+							"// postman.setNextRequest(\"categoryNameValue\");\r",
+							"// postman.setNextRequest(\"nameValue\");\r",
+							"// postman.setNextRequest(\"tagsNameValue\");\r",
+							"// postman.setNextRequest(\"statusValue\");\r",
+							"// postman.setNextRequest(\"photoValue\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 0,\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"Running\"\r\n    },\r\n    \"name\": \"Ilyasa\",\r\n    \"photoUrls\": [\r\n        \"photoedit\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 0,\r\n            \"name\": \"free_style\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}"
+				},
+				"url": {
+					"raw": "{{aurl}}/pet/",
+					"host": [
+						"{{aurl}}"
+					],
+					"path": [
+						"pet",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"categoryNameValue\", \"Fishing\");\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches Fishing\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Fishing\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9222968140498001935,\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"{{categoryNameValue}}\"\r\n    },\r\n    \"name\": \"{{name}}\",\r\n    \"photoUrls\": [\r\n        \"{{photoValue}}\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 0,\r\n            \"name\": \"{{tagsNameValue}}\"\r\n        }\r\n    ],\r\n    \"status\": \"{{statusValue}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{aurl}}/pet",
+					"host": [
+						"{{aurl}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{aurl}}/pet/findByStatus?status=available",
+					"host": [
+						"{{aurl}}"
+					],
+					"path": [
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "available"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{aurl}}/pet/9222968140498001935",
+					"host": [
+						"{{aurl}}"
+					],
+					"path": [
+						"pet",
+						"9222968140498001935"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
