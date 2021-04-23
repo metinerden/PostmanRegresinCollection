@@ -13,6 +13,7 @@
 					"script": {
 						"exec": [
 							"payload= JSON.parse(responseBody);\r",
+							"\r",
 							"var categoryNameValue=payload.category.name;\r",
 							"var nameValue=payload.name;\r",
 							"var tagsNameValue=payload.tags[0].name;\r",
@@ -36,12 +37,12 @@
 							"});\r",
 							"\r",
 							"pm.test(payload, function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"available\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"styless\");\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Your test name\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.category.name).to.eql(\"Running\");\r",
+							"    pm.expect(jsonData.category.name).to.eql(\"Cshoes\");\r",
 							"});\r",
 							"// postman.setNextRequest(\"categoryNameValue\");\r",
 							"// postman.setNextRequest(\"nameValue\");\r",
@@ -70,7 +71,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 0,\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"Running\"\r\n    },\r\n    \"name\": \"Ilyasa\",\r\n    \"photoUrls\": [\r\n        \"photoedit\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 0,\r\n            \"name\": \"free_style\"\r\n        }\r\n    ],\r\n    \"status\": \"available\"\r\n}"
+					"raw": "{\r\n    \"id\": 0,\r\n    \"category\": {\r\n        \"id\": 0,\r\n        \"name\": \"Cshoes\"\r\n    },\r\n    \"name\": \"Chico\",\r\n    \"photoUrls\": [\r\n        \"Sipsak\"\r\n    ],\r\n    \"tags\": [\r\n        {\r\n            \"id\": 0,\r\n            \"name\": \"styless\"\r\n        }\r\n    ],\r\n    \"status\": \"sold\"\r\n}"
 				},
 				"url": {
 					"raw": "{{aurl}}/pet/",
